@@ -43,53 +43,6 @@
     <script src="{{ asset('assets/js/scripts.js') }}"></script>
     <!-- Custom JS File -->
     <script src="{{ asset('assets/js/custom.js') }}"></script>
-    <script>
-        $(document).ready(function() {
-            // Simpan pengaturan tema
-            $(".layout-color input:radio").change(function() {
-                localStorage.setItem("layoutColor", $(this).val());
-                // Logika pengaturan tema lainnya...
-            });
-
-            // Simpan pengaturan sticky header
-            $("#sticky_header_setting").change(function() {
-                localStorage.setItem("stickyHeader", $(this).is(":checked"));
-                // Logika pengaturan sticky header lainnya...
-            });
-
-            // Simpan pengaturan sidebar mini
-            $("#mini_sidebar_setting").change(function() {
-                localStorage.setItem("miniSidebar", $(this).is(":checked"));
-                // Logika pengaturan sidebar mini lainnya...
-            });
-        });
-
-        $(document).ready(function() {
-            // Muat pengaturan tema
-            var savedLayoutColor = localStorage.getItem("layoutColor");
-            if (savedLayoutColor) {
-                $(".layout-color input:radio[value='" + savedLayoutColor + "']")
-                    .prop("checked", true)
-                    .change();
-            }
-
-            // Muat pengaturan sticky header
-            var savedStickyHeader = localStorage.getItem("stickyHeader");
-            if (savedStickyHeader !== null) {
-                $("#sticky_header_setting")
-                    .prop("checked", savedStickyHeader === "true")
-                    .change();
-            }
-
-            // Muat pengaturan sidebar mini
-            var savedMiniSidebar = localStorage.getItem("miniSidebar");
-            if (savedMiniSidebar !== null) {
-                $("#mini_sidebar_setting")
-                    .prop("checked", savedMiniSidebar === "true")
-                    .change();
-            }
-        });
-    </script>
 </body>
 
 </html>

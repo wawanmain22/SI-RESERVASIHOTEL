@@ -72,8 +72,6 @@
     <script src="{{ asset('assets/js/app.min.js') }}"></script>
     <!-- JS Libraries -->
     <script src="{{ asset('assets/bundles/sweetalert/sweetalert.min.js') }}"></script>
-    <!-- Page Specific JS File -->
-    <script src="{{ asset('assets/js/page/auth-login.js') }}"></script>
     <!-- Template JS File -->
     <script src="{{ asset('assets/js/scripts.js') }}"></script>
     <!-- Custom JS File -->
