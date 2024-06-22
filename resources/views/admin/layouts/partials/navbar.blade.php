@@ -20,7 +20,8 @@
                     Hello
                     {{ Auth::guard('admin')->check() ? Auth::guard('admin')->user()->nama : Auth::guard('resepsionis')->user()->nama }}
                 </div>
-                <a href="profile.html" class="dropdown-item has-icon"> <i class="far fa-user"></i> Profile </a>
+                <a href="{{ route('admin.profile.index') }}" class="dropdown-item has-icon"> <i class="far fa-user"></i>
+                    Profile </a>
                 <div class="dropdown-divider"></div>
                 <form action="{{ route('logout') }}" method="POST" class="dropdown-item has-icon text-danger"
                     style="display: flex; align-items: center;">

@@ -9,6 +9,14 @@ class LoginController extends Controller
 {
     public function showLoginForm()
     {
+
+        if (Auth::guard('admin')->check()) {
+            return redirect()->intended('dashboard');
+        }
+
+        if (Auth::guard('resepsionis')->check()) {
+            return redirect()->intended('resepsionis-dashboard');
+        }
         return view('auth.login');
     }
 
@@ -16,11 +24,11 @@ class LoginController extends Controller
     {
         $credentials = $request->only('username', 'password');
 
-        if (Auth::guard('admin')->attempt($credentials)) {
+        if (Auth::guard('admin')->attempt($credentials, $request->remember)) {
             return redirect()->intended('dashboard')->with('success', 'Login berhasil sebagai Admin. Selamat datang kembali!');
         }
 
-        if (Auth::guard('resepsionis')->attempt($credentials)) {
+        if (Auth::guard('resepsionis')->attempt($credentials, $request->remember)) {
             return redirect()->intended('resepsionis-dashboard')->with('success', 'Login berhasil sebagai Resepsionis. Selamat datang kembali!');
         }
 

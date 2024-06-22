@@ -6,11 +6,20 @@ use App\Models\Admin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
+
 
 class RegisterController extends Controller
 {
     public function showRegistrationForm()
     {
+        if (Auth::guard('admin')->check()) {
+            return redirect()->intended('dashboard');
+        }
+
+        if (Auth::guard('resepsionis')->check()) {
+            return redirect()->intended('resepsionis-dashboard');
+        }
         return view('auth.register');
     }
 

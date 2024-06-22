@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\KamarController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\JenisKamarController;
@@ -26,9 +27,13 @@ Route::middleware(['auth:admin'])->group(function () {
     Route::get('/resepsionis', [ResepsionisController::class, 'index'])->name('resepsionis.index');
     Route::get('/kamar', [KamarController::class, 'index'])->name('kamar.index');
     Route::get('/jenis-kamar', [JenisKamarController::class, 'index'])->name('jenis-kamar.index');
+    Route::get('/profile', [ProfileController::class, 'index'])->name('admin.profile.index');
+    Route::put('/profile', [ProfileController::class, 'update'])->name('admin.profile.update');
 });
 
 // Route untuk bagian resepsionis (dikosongkan sementara)
 Route::middleware(['auth:resepsionis'])->group(function () {
     // Tambahkan route khusus resepsionis di sini
 });
+
+

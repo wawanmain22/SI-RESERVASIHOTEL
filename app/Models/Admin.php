@@ -22,4 +22,16 @@ class Admin extends Authenticatable
         'password',
         'remember_token',
     ];
+
+    public $timestamps = true;
+
+    // Listen for the model creating event
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($model) {
+            $model->updated_at = null;
+        });
+    }
 }
