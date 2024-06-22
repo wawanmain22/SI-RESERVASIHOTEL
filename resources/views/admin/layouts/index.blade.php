@@ -13,7 +13,7 @@
     <!-- Custom style CSS -->
     <link rel="stylesheet" href="{{ asset('assets/css/custom.css') }}">
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/img/favicon.ico') }}" />
-    @vite([])
+    @yield('css')
 </head>
 
 <body>
@@ -43,6 +43,8 @@
     <script src="{{ asset('assets/js/scripts.js') }}"></script>
     <!-- Custom JS File -->
     <script src="{{ asset('assets/js/custom.js') }}"></script>
+    @yield('js')
+    @yield('script')
 </body>
 
 </html>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 use App\Models\Admin;
 
 class ProfileController extends Controller
@@ -19,11 +20,18 @@ class ProfileController extends Controller
     {
         $admin = Auth::guard('admin')->user();
 
-        $request->validate([
+        $validator = Validator::make($request->all(), [
             'nama' => ['required', 'string', 'max:255'],
             'username' => ['required', 'string', 'max:255', 'unique:admins,username,' . $admin->id],
             'password' => ['nullable', 'string', 'min:8', 'confirmed'],
         ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => 'error',
+                'message' => $validator->errors()->first(),
+            ]);
+        }
 
         $admin->nama = $request->nama;
         $admin->username = $request->username;
@@ -34,6 +42,9 @@ class ProfileController extends Controller
 
         $admin->save();
 
-        return redirect()->route('admin.profile.index')->with('success', 'Profile updated successfully.');
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Profile updated successfully.',
+        ]);
     }
 }

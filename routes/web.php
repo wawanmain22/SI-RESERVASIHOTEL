@@ -10,7 +10,7 @@ use App\Http\Controllers\JenisKamarController;
 use App\Http\Controllers\ResepsionisController;
 
 // Route default untuk mengarahkan ke halaman login
-Route::get('/', [LoginController::class, 'showLoginForm'])->name('login');
+Route::get('/', [LoginController::class, 'showLoginForm']);
 
 // Route untuk login dan register
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
@@ -35,5 +35,3 @@ Route::middleware(['auth:admin'])->group(function () {
 Route::middleware(['auth:resepsionis'])->group(function () {
     // Tambahkan route khusus resepsionis di sini
 });
-
-
