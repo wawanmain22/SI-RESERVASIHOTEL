@@ -241,6 +241,7 @@ $(function () {
 
             // Update local storage to set mini-sidebar to false
             saveSettings("mini-sidebar", "false");
+            $("#mini_sidebar_setting").prop("checked", false);
             toggle_sidebar_mini(false);
 
             update_sidebar_nicescroll();
@@ -336,6 +337,11 @@ $(function () {
                 });
 
             update_sidebar_nicescroll();
+
+            // Update local storage to set mini-sidebar to false
+            saveSettings("mini-sidebar", "false");
+            $("#mini_sidebar_setting").prop("checked", false);
+            toggle_sidebar_mini(false);
 
             if (now_layout_class == "layout-3") {
                 let nav_second_classes = $(".navbar-secondary").attr("class"),
