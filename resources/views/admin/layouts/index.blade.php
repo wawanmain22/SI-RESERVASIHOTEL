@@ -14,6 +14,8 @@
     <link rel="stylesheet" href="{{ asset('assets/css/custom.css') }}">
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/img/favicon.ico') }}" />
     @yield('css')
+    <!-- Include Vite if necessary, otherwise remove -->
+    @vite([])
 </head>
 
 <body>
@@ -35,6 +37,8 @@
             @include('admin.layouts.partials.footer')
         </div>
     </div>
+    {{-- Yield Modal --}}
+    @yield('modal')
     <!-- General JS Scripts -->
     <script src="{{ asset('assets/js/app.min.js') }}"></script>
     <!-- JS Libraries -->

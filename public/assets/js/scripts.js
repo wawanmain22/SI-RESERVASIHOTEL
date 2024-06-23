@@ -239,11 +239,6 @@ $(function () {
                 body.removeClass("sidebar-show");
             }
 
-            // Update local storage to set mini-sidebar to false
-            saveSettings("mini-sidebar", "false");
-            $("#mini_sidebar_setting").prop("checked", false);
-            toggle_sidebar_mini(false);
-
             update_sidebar_nicescroll();
         } else {
             body.removeClass("search-show search-gone");

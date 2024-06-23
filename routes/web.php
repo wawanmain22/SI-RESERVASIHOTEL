@@ -23,10 +23,23 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 // Route untuk bagian admin
 Route::middleware(['auth:admin'])->group(function () {
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
-    Route::get('/resepsionis', [ResepsionisController::class, 'index'])->name('resepsionis.index');
-    Route::get('/kamar', [KamarController::class, 'index'])->name('kamar.index');
-    Route::get('/jenis-kamar', [JenisKamarController::class, 'index'])->name('jenis-kamar.index');
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard.index');
+
+    // Resepsionis Routes
+    Route::get('/resepsionis', [ResepsionisController::class, 'index'])->name('admin.resepsionis.index');
+    Route::post('/resepsionis', [ResepsionisController::class, 'store'])->name('admin.resepsionis.store');
+    Route::get('/resepsionis/{username}', [ResepsionisController::class, 'show'])->name('admin.resepsionis.show');
+    Route::get('/resepsionis/{username}/edit', [ResepsionisController::class, 'edit'])->name('admin.resepsionis.edit');
+    Route::put('/resepsionis/{username}', [ResepsionisController::class, 'update'])->name('admin.resepsionis.update');
+    Route::delete('/resepsionis/{username}', [ResepsionisController::class, 'destroy'])->name('admin.resepsionis.destroy');
+
+    // Kamar Routes
+    Route::get('/kamar', [KamarController::class, 'index'])->name('admin.kamar.index');
+
+    // Jenis Kamar Routes
+    Route::get('/jenis-kamar', [JenisKamarController::class, 'index'])->name('admin.jenis-kamar.index');
+
+    // Profile Routes
     Route::get('/profile', [ProfileController::class, 'index'])->name('admin.profile.index');
     Route::put('/profile', [ProfileController::class, 'update'])->name('admin.profile.update');
 });
