@@ -1,13 +1,13 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\JenisKamarController;
 use App\Http\Controllers\KamarController;
+use App\Http\Controllers\ResepsionisController;
 use App\Http\Controllers\LoginController;
-use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\JenisKamarController;
-use App\Http\Controllers\ResepsionisController;
+use App\Http\Controllers\ProfileController;
 
 // Route default untuk mengarahkan ke halaman login
 Route::get('/', [LoginController::class, 'showLoginForm']);
@@ -33,11 +33,20 @@ Route::middleware(['auth:admin'])->group(function () {
     Route::put('/resepsionis/{username}', [ResepsionisController::class, 'update'])->name('admin.resepsionis.update');
     Route::delete('/resepsionis/{username}', [ResepsionisController::class, 'destroy'])->name('admin.resepsionis.destroy');
 
-    // Kamar Routes
-    Route::get('/kamar', [KamarController::class, 'index'])->name('admin.kamar.index');
-
     // Jenis Kamar Routes
     Route::get('/jenis-kamar', [JenisKamarController::class, 'index'])->name('admin.jenis-kamar.index');
+    Route::post('/jenis-kamar', [JenisKamarController::class, 'store'])->name('admin.jenis-kamar.store');
+    Route::get('/jenis-kamar/{nama}', [JenisKamarController::class, 'show'])->name('admin.jenis-kamar.show');
+    Route::put('/jenis-kamar/{nama}', [JenisKamarController::class, 'update'])->name('admin.jenis-kamar.update');
+    Route::delete('/jenis-kamar/{nama}', [JenisKamarController::class, 'destroy'])->name('admin.jenis-kamar.destroy');
+
+    // Kamar Routes
+    Route::get('/kamar', [KamarController::class, 'index'])->name('admin.kamar.index');
+    Route::post('/kamar', [KamarController::class, 'store'])->name('admin.kamar.store');
+    Route::get('/kamar/{nomor_kamar}', [KamarController::class, 'show'])->name('admin.kamar.show');
+    Route::put('/kamar/{nomor_kamar}', [KamarController::class, 'update'])->name('admin.kamar.update');
+    Route::delete('/kamar/{nomor_kamar}', [KamarController::class, 'destroy'])->name('admin.kamar.destroy');
+
 
     // Profile Routes
     Route::get('/profile', [ProfileController::class, 'index'])->name('admin.profile.index');

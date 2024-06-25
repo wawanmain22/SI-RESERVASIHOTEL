@@ -96,6 +96,18 @@
                             </div>
                         </div>
                         <div class="form-group">
+                            <label>Konfirmasi Password</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <i class="fas fa-lock"></i>
+                                    </div>
+                                </div>
+                                <input type="password" class="form-control" placeholder="Konfirmasi Password"
+                                    name="password_confirmation">
+                            </div>
+                        </div>
+                        <div class="form-group">
                             <label>Nama</label>
                             <input type="text" class="form-control" placeholder="Nama" name="nama">
                         </div>
@@ -149,14 +161,26 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label>Password</label>
+                            <label>New Password</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <div class="input-group-text">
                                         <i class="fas fa-lock"></i>
                                     </div>
                                 </div>
-                                <input type="password" class="form-control" placeholder="Password" name="password">
+                                <input type="password" class="form-control" placeholder="New Password" name="password">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Konfirmasi New Password</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <i class="fas fa-lock"></i>
+                                    </div>
+                                </div>
+                                <input type="password" class="form-control" placeholder="Konfirmasi New Password"
+                                    name="password_confirmation">
                             </div>
                         </div>
                         <div class="form-group">
@@ -187,6 +211,7 @@
             </div>
         </div>
     </div>
+
 
     <!-- Modal for detail receptionist -->
     <div class="modal fade" id="detailResepsionisModal" tabindex="-1" role="dialog" aria-labelledby="formModal"

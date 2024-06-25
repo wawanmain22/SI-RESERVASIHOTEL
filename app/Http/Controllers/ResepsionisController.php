@@ -18,7 +18,7 @@ class ResepsionisController extends Controller
     {
         $request->validate([
             'username' => 'required|unique:resepsionis,username',
-            'password' => 'required',
+            'password' => 'required|confirmed',
             'nama' => 'required',
             'jenis_kelamin' => 'required',
             'no_hp' => 'required',
@@ -47,6 +47,7 @@ class ResepsionisController extends Controller
     {
         $request->validate([
             'username' => 'required|unique:resepsionis,username,' . $username . ',username',
+            'password' => 'nullable|confirmed',
             'nama' => 'required',
             'jenis_kelamin' => 'required',
             'no_hp' => 'required',

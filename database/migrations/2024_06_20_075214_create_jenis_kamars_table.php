@@ -12,9 +12,9 @@ return new class extends Migration {
     {
         Schema::create('jenis_kamars', function (Blueprint $table) {
             $table->id();
-            $table->string('nama');
+            $table->string('nama')->unique();
             $table->text('fasilitas');
-            $table->text('deskripsi')->nullable();
+            $table->text('deskripsi');
             $table->timestamps();
         });
     }
