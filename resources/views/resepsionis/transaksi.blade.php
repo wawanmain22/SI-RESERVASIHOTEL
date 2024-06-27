@@ -1,6 +1,6 @@
 @extends('resepsionis.layouts.index')
 
-@section('title', 'Data Profile')
+@section('title', 'Data Transaksi')
 
 @section('main')
 

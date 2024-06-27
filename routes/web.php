@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\Resepsionis\ResepsionisDashboardController;
 use Illuminate\Support\Facades\Route;
 // Auth Routes
 use App\Http\Controllers\Auth\LoginController;
@@ -12,7 +11,12 @@ use App\Http\Controllers\Admin\ResepsionisController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ProfileController;
 // Resepsionis Routes
+use App\Http\Controllers\Resepsionis\ResepsionisDashboardController;
 use App\Http\Controllers\Resepsionis\ResepsionisProfileController;
+use App\Http\Controllers\Resepsionis\ResepsionisReservasiController;
+use App\Http\Controllers\Resepsionis\ResepsionisKamarController;
+use App\Http\Controllers\Resepsionis\ResepsionisPelangganController;
+use App\Http\Controllers\Resepsionis\ResepsionisTransaksiController;
 
 // Route default untuk mengarahkan ke halaman login
 Route::get('/', [LoginController::class, 'showLoginForm']);
@@ -65,5 +69,14 @@ Route::middleware(['auth:resepsionis'])->group(function () {
     Route::get('/profile-resepsionis', [ResepsionisProfileController::class, 'index'])->name('resepsionis.profile.index');
 
     // Reservasi Routes
-});
+    Route::get('/reservasi-resepsionis', [ResepsionisReservasiController::class, 'index'])->name('resepsionis.reservasi-resepsionis.index');
 
+    // Kamar Routes
+    Route::get('/kamar-resepsionis', [ResepsionisKamarController::class, 'index'])->name('resepsionis.kamar-resepsionis.index');
+
+    // Pelanggan Routes
+    Route::get('/pelanggan-resepsionis', [ResepsionisPelangganController::class, 'index'])->name('resepsionis.pelanggan-resepsionis.index');
+
+    // Transaksi Routes
+    Route::get('/transaksi-resepsionis', [ResepsionisTransaksiController::class, 'index'])->name('resepsionis.transaksi-resepsionis.index');
+});
