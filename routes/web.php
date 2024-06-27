@@ -1,13 +1,18 @@
 <?php
 
+use App\Http\Controllers\Resepsionis\ResepsionisDashboardController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\JenisKamarController;
-use App\Http\Controllers\KamarController;
-use App\Http\Controllers\ResepsionisController;
-use App\Http\Controllers\LoginController;
-use App\Http\Controllers\RegisterController;
-use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\ProfileController;
+// Auth Routes
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\RegisterController;
+// Admin Routes
+use App\Http\Controllers\Admin\JenisKamarController;
+use App\Http\Controllers\Admin\KamarController;
+use App\Http\Controllers\Admin\ResepsionisController;
+use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\ProfileController;
+// Resepsionis Routes
+use App\Http\Controllers\Resepsionis\ResepsionisProfileController;
 
 // Route default untuk mengarahkan ke halaman login
 Route::get('/', [LoginController::class, 'showLoginForm']);
@@ -47,13 +52,18 @@ Route::middleware(['auth:admin'])->group(function () {
     Route::put('/kamar/{nomor_kamar}', [KamarController::class, 'update'])->name('admin.kamar.update');
     Route::delete('/kamar/{nomor_kamar}', [KamarController::class, 'destroy'])->name('admin.kamar.destroy');
 
-
     // Profile Routes
     Route::get('/profile', [ProfileController::class, 'index'])->name('admin.profile.index');
     Route::put('/profile', [ProfileController::class, 'update'])->name('admin.profile.update');
 });
 
-// Route untuk bagian resepsionis (dikosongkan sementara)
+// Route untuk bagian resepsionis
 Route::middleware(['auth:resepsionis'])->group(function () {
-    // Tambahkan route khusus resepsionis di sini
+    Route::get('/dashboard-resepsionis', [ResepsionisDashboardController::class, 'index'])->name('resepsionis.dashboard.index');
+
+    // Profile Routes
+    Route::get('/profile-resepsionis', [ResepsionisProfileController::class, 'index'])->name('resepsionis.profile.index');
+
+    // Reservasi Routes
 });
+

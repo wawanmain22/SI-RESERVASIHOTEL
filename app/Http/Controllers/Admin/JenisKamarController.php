@@ -1,9 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\Models\JenisKamar;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+
 
 class JenisKamarController extends Controller
 {
