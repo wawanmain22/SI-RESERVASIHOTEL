@@ -6,25 +6,28 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use App\Models\User;
 use App\Models\Admin;
 use App\Http\Controllers\Controller;
-
 
 class ProfileController extends Controller
 {
     public function index()
     {
-        $admin = Auth::guard('admin')->user();
-        return view('admin.profile', compact('admin'));
+        $user = Auth::user();
+        $admin = $user->admin;
+
+        return view('admin.profile', compact('user', 'admin'));
     }
 
     public function update(Request $request)
     {
-        $admin = Auth::guard('admin')->user();
+        $user = Auth::user();
+        $admin = $user->admin;
 
         $validator = Validator::make($request->all(), [
             'nama' => ['required', 'string', 'max:255'],
-            'username' => ['required', 'string', 'max:255', 'unique:admins,username,' . $admin->id],
+            'username' => ['required', 'string', 'max:255', 'unique:users,username,' . $user->id],
             'password' => ['nullable', 'string', 'min:8', 'confirmed'],
         ]);
 
@@ -35,13 +38,15 @@ class ProfileController extends Controller
             ]);
         }
 
-        $admin->nama = $request->nama;
-        $admin->username = $request->username;
+        $user->username = $request->username;
 
         if ($request->filled('password')) {
-            $admin->password = Hash::make($request->password);
+            $user->password = Hash::make($request->password);
         }
 
+        $user->save();
+
+        $admin->nama = $request->nama;
         $admin->save();
 
         return response()->json([

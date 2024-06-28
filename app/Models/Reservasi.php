@@ -12,7 +12,7 @@ class Reservasi extends Model
     protected $table = 'reservasis';
 
     protected $fillable = [
-        'id_resepsionis',
+        'user_id',
         'id_pelanggan',
         'status',
         'tgl_checkin',
@@ -20,9 +20,9 @@ class Reservasi extends Model
         'waktu_pemesanan',
     ];
 
-    public function resepsionis()
+    public function user()
     {
-        return $this->belongsTo(Resepsionis::class, 'id_resepsionis');
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     public function pelanggan()
@@ -40,3 +40,4 @@ class Reservasi extends Model
         return $this->hasOne(Transaksi::class, 'id_reservasi');
     }
 }
+

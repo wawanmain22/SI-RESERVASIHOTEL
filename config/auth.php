@@ -36,14 +36,6 @@ return [
     */
 
     'guards' => [
-        'admin' => [
-            'driver' => 'session',
-            'provider' => 'admins',
-        ],
-        'resepsionis' => [
-            'driver' => 'session',
-            'provider' => 'resepsionis',
-        ],
         'web' => [
             'driver' => 'session',
             'provider' => 'users',
@@ -68,14 +60,6 @@ return [
     */
 
     'providers' => [
-        'admins' => [
-            'driver' => 'eloquent',
-            'model' => App\Models\Admin::class,
-        ],
-        'resepsionis' => [
-            'driver' => 'eloquent',
-            'model' => App\Models\Resepsionis::class,
-        ],
         'users' => [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,

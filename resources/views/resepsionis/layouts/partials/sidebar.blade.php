@@ -15,7 +15,7 @@
             <li class="menu-header">Data Master</li>
             <li class="dropdown {{ request()->routeIs('resepsionis.reservasi-resepsionis.index') ? 'active' : '' }}">
                 <a href="#" class="menu-toggle nav-link has-dropdown"><i
-                        data-feather="file-text"></i><span>Reservasi</span></a>
+                        data-feather="calendar"></i><span>Reservasi</span></a>
                 <ul class="dropdown-menu"
                     style="{{ request()->routeIs('resepsionis.reservasi-resepsionis.index') ? 'display: block;' : '' }}">
                     <li><a class="nav-link {{ request()->routeIs('resepsionis.reservasi-resepsionis.index') ? 'active' : '' }}"

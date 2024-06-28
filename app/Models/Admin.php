@@ -2,36 +2,23 @@
 
 namespace App\Models;
 
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
-class Admin extends Authenticatable
+class Admin extends Model
 {
-    use HasFactory, Notifiable;
+    use HasFactory;
 
     protected $table = 'admins';
 
     protected $fillable = [
         'nama',
-        'username',
-        'password',
+        'user_id',
     ];
 
-    protected $hidden = [
-        'password',
-        'remember_token',
-    ];
-
-    public $timestamps = true;
-
-    // Listen for the model creating event
-    protected static function boot()
+    public function user()
     {
-        parent::boot();
-
-        static::creating(function ($model) {
-            $model->updated_at = null;
-        });
+        return $this->belongsTo(User::class);
     }
 }
+

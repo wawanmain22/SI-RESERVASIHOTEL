@@ -1,21 +1,21 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-// Auth Routes
 use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\Auth\RegisterController;
-// Admin Routes
-use App\Http\Controllers\Admin\JenisKamarController;
+// Auth Routes
 use App\Http\Controllers\Admin\KamarController;
-use App\Http\Controllers\Admin\ResepsionisController;
-use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ProfileController;
+// Admin Routes
+use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\JenisKamarController;
+use App\Http\Controllers\Admin\ResepsionisController;
+use App\Http\Controllers\Resepsionis\ResepsionisKamarController;
 // Resepsionis Routes
 use App\Http\Controllers\Resepsionis\ResepsionisDashboardController;
 use App\Http\Controllers\Resepsionis\ResepsionisProfileController;
-use App\Http\Controllers\Resepsionis\ResepsionisReservasiController;
-use App\Http\Controllers\Resepsionis\ResepsionisKamarController;
 use App\Http\Controllers\Resepsionis\ResepsionisPelangganController;
+use App\Http\Controllers\Resepsionis\ResepsionisReservasiController;
 use App\Http\Controllers\Resepsionis\ResepsionisTransaksiController;
 
 // Route default untuk mengarahkan ke halaman login
@@ -30,8 +30,8 @@ Route::post('/register', [RegisterController::class, 'register']);
 // Route untuk logout
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
-// Route untuk bagian admin
-Route::middleware(['auth:admin'])->group(function () {
+// Route dengan middleware checkrole
+Route::middleware(['auth', 'checkrole:admin'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard.index');
 
     // Resepsionis Routes
@@ -61,8 +61,7 @@ Route::middleware(['auth:admin'])->group(function () {
     Route::put('/profile', [ProfileController::class, 'update'])->name('admin.profile.update');
 });
 
-// Route untuk bagian resepsionis
-Route::middleware(['auth:resepsionis'])->group(function () {
+Route::middleware(['auth', 'checkrole:resepsionis'])->group(function () {
     Route::get('/dashboard-resepsionis', [ResepsionisDashboardController::class, 'index'])->name('resepsionis.dashboard.index');
 
     // Profile Routes

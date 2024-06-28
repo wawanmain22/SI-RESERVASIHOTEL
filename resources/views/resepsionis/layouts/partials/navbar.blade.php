@@ -13,16 +13,25 @@
         <li class="dropdown">
             <a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
                 <img alt="image" src="{{ asset('assets/img/user-pp.png') }}" class="user-img-radious-style">
-                <span class="d-sm-none d-lg-inline-block"></span>
             </a>
             <div class="dropdown-menu dropdown-menu-right pullDown">
                 <div class="dropdown-title">
-                    Hello
-                    {{ Auth::guard('admin')->check() ? Auth::guard('admin')->user()->nama : Auth::guard('resepsionis')->user()->nama }}
+                    Hello,
+                    @if (Auth::user()->role == 'admin')
+                        {{ Auth::user()->admin->nama }}
+                    @elseif (Auth::user()->role == 'resepsionis')
+                        {{ Auth::user()->resepsionis->nama }}
+                    @endif
                 </div>
-                <a href="{{ route('resepsionis.profile.index') }}" class="dropdown-item has-icon">
-                    <i class="far fa-user"></i> Profile
-                </a>
+                @if (Auth::user()->role == 'admin')
+                    <a href="{{ route('admin.profile.index') }}" class="dropdown-item has-icon">
+                        <i class="far fa-user"></i> Profile
+                    </a>
+                @elseif (Auth::user()->role == 'resepsionis')
+                    <a href="{{ route('resepsionis.profile.index') }}" class="dropdown-item has-icon">
+                        <i class="far fa-user"></i> Profile
+                    </a>
+                @endif
                 <div class="dropdown-divider"></div>
                 <a href="#" class="dropdown-item has-icon text-danger"
                     onclick="event.preventDefault(); document.getElementById('logout-form').submit();">

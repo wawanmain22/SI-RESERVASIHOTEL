@@ -30,21 +30,22 @@
                                 @foreach ($resepsionis as $index => $r)
                                     <tr>
                                         <td class="text-center">{{ $index + 1 }}</td>
-                                        <td>{{ $r->username }}</td>
+                                        <td>{{ $r->user->username }}</td>
                                         <td>{{ $r->nama }}</td>
                                         <td>{{ $r->jenis_kelamin }}</td>
                                         <td>{{ $r->no_hp }}</td>
                                         <td>{{ $r->alamat }}</td>
                                         <td>
                                             <a href="#" class="btn btn-icon btn-info" data-toggle="modal"
-                                                data-target="#detailResepsionisModal" data-username="{{ $r->username }}"><i
+                                                data-target="#detailResepsionisModal"
+                                                data-username="{{ $r->user->username }}"><i
                                                     class="fas fa-info-circle"></i></a>
                                             <a href="#" class="btn btn-icon btn-primary" data-toggle="modal"
-                                                data-target="#editResepsionisModal" data-username="{{ $r->username }}"><i
-                                                    class="far fa-edit"></i></a>
+                                                data-target="#editResepsionisModal"
+                                                data-username="{{ $r->user->username }}"><i class="far fa-edit"></i></a>
                                             <a href="#" class="btn btn-icon btn-danger"
-                                                data-username="{{ $r->username }}"
-                                                data-action="{{ route('admin.resepsionis.destroy', $r->username) }}"><i
+                                                data-username="{{ $r->user->username }}"
+                                                data-action="{{ route('admin.resepsionis.destroy', $r->user->username) }}"><i
                                                     class="fas fa-times"></i></a>
                                         </td>
                                     </tr>
@@ -212,7 +213,6 @@
         </div>
     </div>
 
-
     <!-- Modal for detail receptionist -->
     <div class="modal fade" id="detailResepsionisModal" tabindex="-1" role="dialog" aria-labelledby="formModal"
         aria-hidden="true">
@@ -315,7 +315,7 @@
 
                 $.get('/resepsionis/' + username, function(data) {
                     $('#editResepsionisForm').attr('action', '/resepsionis/' + username);
-                    $('#editUsername').val(data.username);
+                    $('#editUsername').val(data.user.username);
                     $('#editNama').val(data.nama);
                     $('#editJenisKelamin').val(data.jenis_kelamin);
                     $('#editNoHP').val(data.no_hp);
@@ -390,7 +390,7 @@
                 let username = button.data('username');
 
                 $.get('/resepsionis/' + username, function(data) {
-                    $('#detailUsername').val(data.username);
+                    $('#detailUsername').val(data.user.username);
                     $('#detailNama').val(data.nama);
                     $('#detailJenisKelamin').val(data.jenis_kelamin);
                     $('#detailNoHP').val(data.no_hp);
