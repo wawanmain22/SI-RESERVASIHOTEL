@@ -2,27 +2,25 @@
 
 namespace App\Models;
 
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
-class Resepsionis extends Authenticatable
+class Resepsionis extends Model
 {
-    use HasFactory, Notifiable;
+    use HasFactory;
 
     protected $table = 'resepsionis';
 
     protected $fillable = [
-        'username',
-        'password',
         'nama',
         'jenis_kelamin',
         'no_hp',
         'alamat',
+        'user_id',
     ];
 
-    protected $hidden = [
-        'password',
-        'remember_token',
-    ];
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

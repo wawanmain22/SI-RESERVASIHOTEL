@@ -29,12 +29,12 @@
                                 <div class="col-md-4 col-6 b-r">
                                     <strong>Username</strong>
                                     <br>
-                                    <p class="text-muted">{{ $admin->username }}</p>
+                                    <p class="text-muted">{{ $user->username }}</p>
                                 </div>
                                 <div class="col-md-4 col-6">
                                     <strong>Tanggal Akun Dibuat</strong>
                                     <br>
-                                    <p class="text-muted">{{ $admin->created_at->format('d/m/Y H:i') }}</p>
+                                    <p class="text-muted">{{ $user->created_at->format('d/m/Y H:i') }}</p>
                                 </div>
                             </div>
                         </div>
@@ -61,7 +61,7 @@
                                             <label>Username</label>
                                             <input type="text"
                                                 class="form-control @error('username') is-invalid @enderror" name="username"
-                                                value="{{ old('username', $admin->username) }}" required>
+                                                value="{{ old('username', $user->username) }}" required>
                                             @error('username')
                                                 <div class="invalid-feedback">{{ $message }}</div>
                                             @enderror

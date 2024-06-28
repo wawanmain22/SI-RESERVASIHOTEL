@@ -12,8 +12,8 @@ return new class extends Migration {
     {
         Schema::create('reservasis', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('id_resepsionis')->constrained('resepsionis');
-            $table->foreignId('id_pelanggan')->constrained('pelanggans');
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+            $table->foreignId('id_pelanggan')->constrained('pelanggans')->onDelete('cascade');
             $table->enum('status', ['Booked', 'Checkin', 'Checkout'])->default('Booked');
             $table->date('tgl_checkin');
             $table->date('tgl_checkout');

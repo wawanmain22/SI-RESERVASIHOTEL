@@ -12,13 +12,11 @@ return new class extends Migration {
     {
         Schema::create('resepsionis', function (Blueprint $table) {
             $table->id();
-            $table->string('username');
-            $table->string('password');
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->string('nama');
             $table->string('jenis_kelamin');
             $table->string('no_hp');
             $table->string('alamat');
-            $table->rememberToken();
             $table->timestamps();
         });
     }
