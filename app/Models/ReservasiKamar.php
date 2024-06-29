@@ -12,13 +12,13 @@ class ReservasiKamar extends Model
     protected $table = 'reservasi_kamars';
 
     protected $fillable = [
-        'id_reservasi',
+        'id_reservasi_kamar',
         'id_kamar',
     ];
 
     public function reservasi()
     {
-        return $this->belongsTo(Reservasi::class, 'id_reservasi');
+        return $this->belongsTo(Reservasi::class, 'id_reservasi_kamar');
     }
 
     public function kamar()

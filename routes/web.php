@@ -2,16 +2,13 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
-// Auth Routes
 use App\Http\Controllers\Admin\KamarController;
 use App\Http\Controllers\Admin\ProfileController;
-// Admin Routes
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\JenisKamarController;
 use App\Http\Controllers\Admin\ResepsionisController;
 use App\Http\Controllers\Resepsionis\ResepsionisKamarController;
-// Resepsionis Routes
 use App\Http\Controllers\Resepsionis\ResepsionisDashboardController;
 use App\Http\Controllers\Resepsionis\ResepsionisProfileController;
 use App\Http\Controllers\Resepsionis\ResepsionisPelangganController;
@@ -69,9 +66,14 @@ Route::middleware(['auth', 'checkrole:resepsionis'])->group(function () {
 
     // Reservasi Routes
     Route::get('/reservasi-resepsionis', [ResepsionisReservasiController::class, 'index'])->name('resepsionis.reservasi-resepsionis.index');
+    Route::post('/reservasi-resepsionis', [ResepsionisReservasiController::class, 'store'])->name('resepsionis.reservasi-resepsionis.store');
+    Route::get('/reservasi-resepsionis/{kode_reservasi}', [ResepsionisReservasiController::class, 'show'])->name('resepsionis.reservasi-resepsionis.show');
+    Route::post('/reservasi-resepsionis/{kode_reservasi}/update', [ResepsionisReservasiController::class, 'update'])->name('resepsionis.reservasi-resepsionis.update');
+    Route::post('/reservasi-resepsionis/{kode_reservasi}/destroy', [ResepsionisReservasiController::class, 'destroy'])->name('resepsionis.reservasi-resepsionis.destroy');
 
     // Kamar Routes
     Route::get('/kamar-resepsionis', [ResepsionisKamarController::class, 'index'])->name('resepsionis.kamar-resepsionis.index');
+    Route::get('/kamar-resepsionis/{nomor_kamar}', [ResepsionisKamarController::class, 'show'])->name('resepsionis.kamar-resepsionis.show');
 
     // Pelanggan Routes
     Route::get('/pelanggan-resepsionis', [ResepsionisPelangganController::class, 'index'])->name('resepsionis.pelanggan-resepsionis.index');

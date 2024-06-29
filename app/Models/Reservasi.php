@@ -12,8 +12,8 @@ class Reservasi extends Model
     protected $table = 'reservasis';
 
     protected $fillable = [
+        'kode_reservasi',
         'user_id',
-        'id_pelanggan',
         'status',
         'tgl_checkin',
         'tgl_checkout',
@@ -25,14 +25,13 @@ class Reservasi extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function pelanggan()
+    public function reservasiPelanggan()
     {
-        return $this->belongsTo(Pelanggan::class, 'id_pelanggan');
+        return $this->hasMany(ReservasiPelanggan::class, 'id_reservasi_pelanggan');
     }
-
     public function reservasiKamar()
     {
-        return $this->hasMany(ReservasiKamar::class, 'id_reservasi');
+        return $this->hasMany(ReservasiKamar::class, 'id_reservasi_kamar');
     }
 
     public function transaksi()
