@@ -13,7 +13,7 @@
                     </div>
                     <div class="text-wrapper">
                         <h5>New Booking</h5>
-                        <h2>{{ $newBookings }}</h2>
+                        <h2 class="card-value">{{ $newBookings }}</h2>
                     </div>
                 </div>
             </div>
@@ -27,7 +27,7 @@
                     </div>
                     <div class="text-wrapper">
                         <h5>Customers</h5>
-                        <h2>{{ $totalCustomers }}</h2>
+                        <h2 class="card-value">{{ $totalCustomers }}</h2>
                     </div>
                 </div>
             </div>
@@ -41,7 +41,7 @@
                     </div>
                     <div class="text-wrapper">
                         <h5>Active Reservations</h5>
-                        <h2>{{ $activeReservations }}</h2>
+                        <h2 class="card-value">{{ $activeReservations }}</h2>
                     </div>
                 </div>
             </div>
@@ -55,7 +55,7 @@
                     </div>
                     <div class="text-wrapper">
                         <h5>Revenue</h5>
-                        <h2>Rp{{ number_format($revenue, 0, ',', '.') }}</h2>
+                        <h2 class="card-value">Rp{{ number_format($revenue, 0, ',', '.') }}</h2>
                     </div>
                 </div>
             </div>
@@ -69,7 +69,7 @@
                     </div>
                     <div class="text-wrapper">
                         <h5>Weekly Earnings</h5>
-                        <h2>Rp{{ number_format($weeklyEarnings, 0, ',', '.') }}</h2>
+                        <h2 class="card-value">Rp{{ number_format($weeklyEarnings, 0, ',', '.') }}</h2>
                     </div>
                 </div>
             </div>
@@ -82,7 +82,7 @@
                     </div>
                     <div class="text-wrapper">
                         <h5>Monthly Earnings</h5>
-                        <h2>Rp{{ number_format($monthlyEarnings, 0, ',', '.') }}</h2>
+                        <h2 class="card-value">Rp{{ number_format($monthlyEarnings, 0, ',', '.') }}</h2>
                     </div>
                 </div>
             </div>
@@ -95,7 +95,7 @@
                     </div>
                     <div class="text-wrapper">
                         <h5>Yearly Earnings</h5>
-                        <h2>Rp{{ number_format($yearlyEarnings, 0, ',', '.') }}</h2>
+                        <h2 class="card-value">Rp{{ number_format($yearlyEarnings, 0, ',', '.') }}</h2>
                     </div>
                 </div>
             </div>
@@ -109,7 +109,7 @@
                     </div>
                     <div class="text-wrapper">
                         <h5>Available Rooms</h5>
-                        <h2>{{ $availableRooms }}</h2>
+                        <h2 class="card-value">{{ $availableRooms }}</h2>
                     </div>
                 </div>
             </div>
@@ -123,7 +123,7 @@
                     </div>
                     <div class="text-wrapper">
                         <h5>Booked Rooms</h5>
-                        <h2>{{ $bookedRooms }}</h2>
+                        <h2 class="card-value">{{ $bookedRooms }}</h2>
                     </div>
                 </div>
             </div>
@@ -162,26 +162,37 @@
 
         .custom-card .text-wrapper {
             margin-left: 20px;
+            flex: 1;
+            overflow: hidden;
         }
 
         .custom-card .text-wrapper h5 {
             margin: 0;
             font-size: 1rem;
-            /* Adjusted text size */
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         .custom-card .text-wrapper h2 {
             margin: 0;
-            font-size: 2.5rem;
-            /* Adjusted number size */
+            font-size: 1rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
-        .col-green {
-            color: green;
+        .card-value {
+            font-size: calc(1.5rem + 1vw);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
-        .col-orange {
-            color: orange;
+        @media (max-width: 576px) {
+            .custom-card .text-wrapper h2 {
+                font-size: 1.5rem;
+            }
         }
     </style>
 @endsection

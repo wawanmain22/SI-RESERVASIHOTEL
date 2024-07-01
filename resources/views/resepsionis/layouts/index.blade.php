@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="{{ asset('assets/css/custom.css') }}">
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/img/favicon.ico') }}" />
     @yield('css')
-    @vite([])
+    {{-- @vite([]) --}}
 </head>
 
 <body>

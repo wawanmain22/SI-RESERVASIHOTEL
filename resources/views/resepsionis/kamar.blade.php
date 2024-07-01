@@ -66,6 +66,14 @@
                             <input type="text" class="form-control" id="detailIdJenisKamar" readonly>
                         </div>
                         <div class="form-group">
+                            <label>Fasilitas</label>
+                            <textarea class="form-control" id="detailFasilitas" readonly></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Deskripsi</label>
+                            <textarea class="form-control" id="detailDeskripsi" readonly></textarea>
+                        </div>
+                        <div class="form-group">
                             <label>Nomor Kamar</label>
                             <input type="text" class="form-control" id="detailNomorKamar" readonly>
                         </div>
@@ -118,6 +126,10 @@
 
                 $.get('{{ url('kamar-resepsionis') }}/' + nomor_kamar, function(data) {
                     $('#detailIdJenisKamar').val(data.jenis_kamar ? data.jenis_kamar.nama : 'N/A');
+                    $('#detailFasilitas').val(data.jenis_kamar ? data.jenis_kamar.fasilitas :
+                    'N/A');
+                    $('#detailDeskripsi').val(data.jenis_kamar ? data.jenis_kamar.deskripsi :
+                    'N/A');
                     $('#detailNomorKamar').val(data.nomor_kamar);
                     $('#detailHarga').val(formatRupiah(data.harga));
                     $('#detailStatus').val(data.status);
