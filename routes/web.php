@@ -2,13 +2,16 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
+// Auth Routes
 use App\Http\Controllers\Admin\KamarController;
 use App\Http\Controllers\Admin\ProfileController;
+// Admin Routes
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\JenisKamarController;
 use App\Http\Controllers\Admin\ResepsionisController;
 use App\Http\Controllers\Resepsionis\ResepsionisKamarController;
+// Resepsionis Routes
 use App\Http\Controllers\Resepsionis\ResepsionisDashboardController;
 use App\Http\Controllers\Resepsionis\ResepsionisProfileController;
 use App\Http\Controllers\Resepsionis\ResepsionisPelangganController;
@@ -63,13 +66,16 @@ Route::middleware(['auth', 'checkrole:resepsionis'])->group(function () {
 
     // Profile Routes
     Route::get('/profile-resepsionis', [ResepsionisProfileController::class, 'index'])->name('resepsionis.profile.index');
+    Route::put('/profile-resepsionis', [ResepsionisProfileController::class, 'update'])->name('resepsionis.profile.update');
 
     // Reservasi Routes
-    Route::get('/reservasi-resepsionis', [ResepsionisReservasiController::class, 'index'])->name('resepsionis.reservasi-resepsionis.index');
-    Route::post('/reservasi-resepsionis', [ResepsionisReservasiController::class, 'store'])->name('resepsionis.reservasi-resepsionis.store');
-    Route::get('/reservasi-resepsionis/{kode_reservasi}', [ResepsionisReservasiController::class, 'show'])->name('resepsionis.reservasi-resepsionis.show');
-    Route::post('/reservasi-resepsionis/{kode_reservasi}/update', [ResepsionisReservasiController::class, 'update'])->name('resepsionis.reservasi-resepsionis.update');
-    Route::post('/reservasi-resepsionis/{kode_reservasi}/destroy', [ResepsionisReservasiController::class, 'destroy'])->name('resepsionis.reservasi-resepsionis.destroy');
+    Route::get('reservasi-resepsionis', [ResepsionisReservasiController::class, 'index'])->name('resepsionis.reservasi-resepsionis.index');
+    Route::post('reservasi-resepsionis', [ResepsionisReservasiController::class, 'store'])->name('resepsionis.reservasi-resepsionis.store');
+    Route::get('reservasi-resepsionis/{kode_reservasi}', [ResepsionisReservasiController::class, 'show'])->name('resepsionis.reservasi-resepsionis.show');
+    Route::post('reservasi-resepsionis/{kode_reservasi}/update', [ResepsionisReservasiController::class, 'update'])->name('resepsionis.reservasi-resepsionis.update');
+    Route::post('reservasi-resepsionis/{kode_reservasi}/destroy', [ResepsionisReservasiController::class, 'destroy'])->name('resepsionis.reservasi-resepsionis.destroy');
+    Route::post('reservasi-resepsionis/konfirmasi-checkin/{kode_reservasi}', [ResepsionisReservasiController::class, 'konfirmasiCheckin'])->name('resepsionis.reservasi-resepsionis.konfirmasi-checkin');
+    Route::post('reservasi-resepsionis/konfirmasi-checkout/{kode_reservasi}', [ResepsionisReservasiController::class, 'konfirmasiCheckout'])->name('resepsionis.reservasi-resepsionis.konfirmasi-checkout');
 
     // Kamar Routes
     Route::get('/kamar-resepsionis', [ResepsionisKamarController::class, 'index'])->name('resepsionis.kamar-resepsionis.index');
@@ -77,7 +83,9 @@ Route::middleware(['auth', 'checkrole:resepsionis'])->group(function () {
 
     // Pelanggan Routes
     Route::get('/pelanggan-resepsionis', [ResepsionisPelangganController::class, 'index'])->name('resepsionis.pelanggan-resepsionis.index');
+    Route::get('/pelanggan-resepsionis/{id}', [ResepsionisPelangganController::class, 'show'])->name('resepsionis.pelanggan-resepsionis.show');
 
     // Transaksi Routes
     Route::get('/transaksi-resepsionis', [ResepsionisTransaksiController::class, 'index'])->name('resepsionis.transaksi-resepsionis.index');
+    Route::get('/transaksi-resepsionis/{id}', [ResepsionisTransaksiController::class, 'show'])->name('resepsionis.transaksi-resepsionis.show');
 });

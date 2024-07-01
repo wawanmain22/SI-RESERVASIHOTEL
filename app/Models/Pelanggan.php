@@ -18,4 +18,9 @@ class Pelanggan extends Model
         'alamat',
         'email',
     ];
+
+    public function reservasiPelanggan()
+    {
+        return $this->hasMany(ReservasiPelanggan::class, 'id_pelanggan');
+    }
 }

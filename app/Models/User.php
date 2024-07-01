@@ -55,4 +55,5 @@ class User extends Authenticatable
     {
         return $this->hasOne(Resepsionis::class, 'user_id');
     }
+
 }

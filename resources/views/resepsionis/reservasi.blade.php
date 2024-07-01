@@ -38,14 +38,25 @@
                                                 data-target="#detailReservasiModal"
                                                 data-kode_reservasi="{{ $reservasi->kode_reservasi }}"><i
                                                     class="fas fa-info-circle"></i></a>
-                                            <a href="#" class="btn btn-icon btn-primary" data-toggle="modal"
-                                                data-target="#editReservasiModal"
-                                                data-kode_reservasi="{{ $reservasi->kode_reservasi }}"><i
-                                                    class="far fa-edit"></i></a>
-                                            <a href="#" class="btn btn-icon btn-danger"
-                                                data-kode_reservasi="{{ $reservasi->kode_reservasi }}"
-                                                data-action="{{ route('resepsionis.reservasi-resepsionis.destroy', $reservasi->kode_reservasi) }}"><i
-                                                    class="fas fa-times"></i></a>
+                                            @if ($reservasi->status == 'Booked')
+                                                <a href="#" class="btn btn-icon btn-primary" data-toggle="modal"
+                                                    data-target="#editReservasiModal"
+                                                    data-kode_reservasi="{{ $reservasi->kode_reservasi }}"><i
+                                                        class="far fa-edit"></i></a>
+                                                <a href="#" class="btn btn-icon btn-danger"
+                                                    data-kode_reservasi="{{ $reservasi->kode_reservasi }}"
+                                                    data-action="{{ route('resepsionis.reservasi-resepsionis.destroy', $reservasi->kode_reservasi) }}"><i
+                                                        class="fas fa-times"></i></a>
+                                                <a href="#" class="btn btn-icon btn-success" data-toggle="modal"
+                                                    data-target="#konfirmasiCheckinModal"
+                                                    data-kode_reservasi="{{ $reservasi->kode_reservasi }}"><i
+                                                        class="fas fa-check"></i></a>
+                                            @elseif ($reservasi->status == 'Checkin')
+                                                <a href="#" class="btn btn-icon btn-warning" data-toggle="modal"
+                                                    data-target="#konfirmasiCheckoutModal"
+                                                    data-kode_reservasi="{{ $reservasi->kode_reservasi }}"><i
+                                                        class="fas fa-door-open"></i></a>
+                                            @endif
                                         </td>
                                     </tr>
                                 @endforeach
@@ -146,7 +157,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="formModal">Edit Data Reservasi</h5>
+                    <h5 class="modal-title" id="formModal">Reschedule Reservasi</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -208,6 +219,85 @@
                             <div class="scrollable-container" id="detailKamarContainer"></div>
                         </div>
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for konfirmasi checkin reservasi -->
+    <div class="modal fade" id="konfirmasiCheckinModal" tabindex="-1" role="dialog" aria-labelledby="formModal"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="formModal">Konfirmasi Checkin Reservasi</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label>Kode Reservasi</label>
+                            <input type="text" class="form-control" id="konfirmasiKodeReservasi" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label>Tanggal Check-in</label>
+                            <input type="date" class="form-control" id="konfirmasiTglCheckin" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label>Tanggal Check-out</label>
+                            <input type="date" class="form-control" id="konfirmasiTglCheckout" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label>Data Pelanggan</label>
+                            <div class="scrollable-container" id="konfirmasiPelangganContainer"></div>
+                        </div>
+                        <div class="form-group">
+                            <label>Data Kamar</label>
+                            <div class="scrollable-container" id="konfirmasiKamarContainer"></div>
+                        </div>
+                        <div class="form-group">
+                            <label>Total Biaya</label>
+                            <input type="text" class="form-control" id="konfirmasiTotalBiaya" readonly>
+                        </div>
+                        <button type="button" id="konfirmasiSudahBayarButton" class="btn btn-success">Sudah
+                            Bayar</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for konfirmasi checkout reservasi -->
+    <div class="modal fade" id="konfirmasiCheckoutModal" tabindex="-1" role="dialog" aria-labelledby="formModal"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="formModal">Konfirmasi Checkout Reservasi</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label>Kode Reservasi</label>
+                            <input type="text" class="form-control" id="konfirmasiCheckoutKodeReservasi" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label>Data Pelanggan</label>
+                            <div class="scrollable-container" id="konfirmasiCheckoutPelangganContainer"></div>
+                        </div>
+                        <div class="form-group">
+                            <label>Data Kamar</label>
+                            <div class="scrollable-container" id="konfirmasiCheckoutKamarContainer"></div>
+                        </div>
+                        <button type="button" id="konfirmasiCheckoutButton" class="btn btn-success">Ya</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tidak</button>
                     </form>
                 </div>
             </div>
@@ -468,6 +558,165 @@
                     swal("Error", "Data tidak ditemukan atau terjadi kesalahan", "error");
                 });
             });
+
+            // Handle konfirmasi checkin button click
+            $('#konfirmasiCheckinModal').on('show.bs.modal', function(event) {
+                let button = $(event.relatedTarget);
+                let kode_reservasi = button.data('kode_reservasi');
+
+                $.get('{{ url('reservasi-resepsionis') }}/' + kode_reservasi, function(data) {
+                    console.log('Detail Data:', data); // Log detail data for debugging
+
+                    $('#konfirmasiKodeReservasi').val(data.kode_reservasi);
+                    $('#konfirmasiTglCheckin').val(data.tgl_checkin);
+                    $('#konfirmasiTglCheckout').val(data.tgl_checkout);
+
+                    let pelangganData = '';
+                    if (data.reservasi_pelanggan && data.reservasi_pelanggan.length > 0) {
+                        data.reservasi_pelanggan.forEach(function(reservasiPelanggan) {
+                            pelangganData += `
+                    <div class="pelanggan-item">
+                        <p><strong>Nama:</strong> ${reservasiPelanggan.pelanggan.nama}</p>
+                        <p><strong>Jenis Kelamin:</strong> ${reservasiPelanggan.pelanggan.jenis_kelamin}</p>
+                        <p><strong>No HP:</strong> ${reservasiPelanggan.pelanggan.no_hp}</p>
+                        <p><strong>Alamat:</strong> ${reservasiPelanggan.pelanggan.alamat}</p>
+                        <p><strong>Email:</strong> ${reservasiPelanggan.pelanggan.email}</p>
+                    </div>
+                `;
+                        });
+                    } else {
+                        pelangganData = 'Data tidak tersedia';
+                    }
+                    $('#konfirmasiPelangganContainer').html(pelangganData);
+
+                    let kamarData = '';
+                    let totalBiaya = 0;
+                    if (data.reservasi_kamar && data.reservasi_kamar.length > 0) {
+                        data.reservasi_kamar.forEach(function(reservasiKamar) {
+                            totalBiaya += parseFloat(reservasiKamar.kamar.harga);
+                            kamarData += `
+                    <div class="kamar-item">
+                        <p><strong>Jenis Kamar:</strong> ${reservasiKamar.kamar.jenis_kamar.nama}</p>
+                        <p><strong>Nomor Kamar:</strong> ${reservasiKamar.kamar.nomor_kamar}</p>
+                        <p><strong>Harga:</strong> ${reservasiKamar.kamar.formatted_harga}</p>
+                    </div>
+                `;
+                        });
+                    } else {
+                        kamarData = 'Data tidak tersedia';
+                    }
+                    $('#konfirmasiKamarContainer').html(kamarData);
+                    $('#konfirmasiTotalBiaya').val(formatRupiah(totalBiaya));
+                }).fail(function(xhr) {
+                    console.log('Error:', xhr.responseText); // Log error response for debugging
+                    swal("Error", "Data tidak ditemukan atau terjadi kesalahan", "error");
+                });
+            });
+
+            $('#konfirmasiSudahBayarButton').on('click', function() {
+                let kode_reservasi = $('#konfirmasiKodeReservasi').val();
+
+                $.post('{{ url('reservasi-resepsionis/konfirmasi-checkin') }}/' + kode_reservasi, {
+                    _token: '{{ csrf_token() }}'
+                }, function(response) {
+                    console.log('Success:', response);
+                    if (response.success) {
+                        swal("Berhasil", "Reservasi telah dikonfirmasi", "success").then(() => {
+                            location.reload();
+                        });
+                    } else {
+                        swal("Error", response.message, "error");
+                    }
+                }).fail(function(xhr) {
+                    console.log('Error:', xhr.responseText);
+                    swal("Error", "Terjadi kesalahan saat konfirmasi checkin", "error");
+                });
+            });
+
+            // Handle konfirmasi checkout button click
+            $('#konfirmasiCheckoutModal').on('show.bs.modal', function(event) {
+                let button = $(event.relatedTarget);
+                let kode_reservasi = button.data('kode_reservasi');
+
+                $.get('{{ url('reservasi-resepsionis') }}/' + kode_reservasi, function(data) {
+                    console.log('Detail Data:', data); // Log detail data for debugging
+
+                    $('#konfirmasiCheckoutKodeReservasi').val(data.kode_reservasi);
+
+                    let pelangganData = '';
+                    if (data.reservasi_pelanggan && data.reservasi_pelanggan.length > 0) {
+                        data.reservasi_pelanggan.forEach(function(reservasiPelanggan) {
+                            pelangganData += `
+                                <div class="pelanggan-item">
+                                    <p><strong>Nama:</strong> ${reservasiPelanggan.pelanggan.nama}</p>
+                                    <p><strong>Jenis Kelamin:</strong> ${reservasiPelanggan.pelanggan.jenis_kelamin}</p>
+                                    <p><strong>No HP:</strong> ${reservasiPelanggan.pelanggan.no_hp}</p>
+                                    <p><strong>Alamat:</strong> ${reservasiPelanggan.pelanggan.alamat}</p>
+                                    <p><strong>Email:</strong> ${reservasiPelanggan.pelanggan.email}</p>
+                                </div>
+                            `;
+                        });
+                    } else {
+                        pelangganData = 'Data tidak tersedia';
+                    }
+                    $('#konfirmasiCheckoutPelangganContainer').html(pelangganData);
+
+                    let kamarData = '';
+                    if (data.reservasi_kamar && data.reservasi_kamar.length > 0) {
+                        data.reservasi_kamar.forEach(function(reservasiKamar) {
+                            kamarData += `
+                                <div class="kamar-item">
+                                    <p><strong>Jenis Kamar:</strong> ${reservasiKamar.kamar.jenis_kamar.nama}</p>
+                                    <p><strong>Nomor Kamar:</strong> ${reservasiKamar.kamar.nomor_kamar}</p>
+                                    <p><strong>Harga:</strong> ${reservasiKamar.kamar.formatted_harga}</p>
+                                </div>
+                            `;
+                        });
+                    } else {
+                        kamarData = 'Data tidak tersedia';
+                    }
+                    $('#konfirmasiCheckoutKamarContainer').html(kamarData);
+                }).fail(function(xhr) {
+                    console.log('Error:', xhr.responseText); // Log error response for debugging
+                    swal("Error", "Data tidak ditemukan atau terjadi kesalahan", "error");
+                });
+            });
+
+            $('#konfirmasiCheckoutButton').on('click', function() {
+                let kode_reservasi = $('#konfirmasiCheckoutKodeReservasi').val();
+
+                $.post('{{ url('reservasi-resepsionis/konfirmasi-checkout') }}/' + kode_reservasi, {
+                    _token: '{{ csrf_token() }}'
+                }, function(response) {
+                    console.log('Success:', response);
+                    if (response.success) {
+                        swal("Berhasil", "Reservasi telah di-checkout", "success").then(() => {
+                            location.reload();
+                        });
+                    } else {
+                        swal("Error", response.message, "error");
+                    }
+                }).fail(function(xhr) {
+                    console.log('Error:', xhr.responseText);
+                    swal("Error", "Terjadi kesalahan saat konfirmasi checkout", "error");
+                });
+            });
+
+            function formatRupiah(angka, prefix = 'Rp') {
+                let numberString = angka.toString().replace(/[^0-9]/g, '');
+                let split = numberString.split(',');
+                let sisa = split[0].length % 3;
+                let rupiah = split[0].substr(0, sisa);
+                let ribuan = split[0].substr(sisa).match(/\d{3}/gi);
+
+                if (ribuan) {
+                    let separator = sisa ? '.' : '';
+                    rupiah += separator + ribuan.join('.');
+                }
+
+                rupiah = split[1] !== undefined ? rupiah + ',' + split[1] : rupiah;
+                return prefix + rupiah;
+            }
         });
     </script>
 @endsection
