@@ -29,7 +29,7 @@
                                         <td>{{ $kamar->nomor_kamar }}</td>
                                         <td>{{ $kamar->jenisKamar->nama }}</td>
                                         <td>{{ formatRupiah($kamar->harga) }}</td>
-                                        <td>{{ $kamar->status }}</td>
+                                        <td>{{ $kamar->status_display }}</td>
                                         <td>
                                             <a href="#" class="btn btn-icon btn-info" data-toggle="modal"
                                                 data-target="#detailKamarModal"
@@ -132,7 +132,7 @@
                     'N/A');
                     $('#detailNomorKamar').val(data.nomor_kamar);
                     $('#detailHarga').val(formatRupiah(data.harga));
-                    $('#detailStatus').val(data.status);
+                    $('#detailStatus').val(data.status_display);
                 }).fail(function() {
                     swal("Error", "Data tidak ditemukan atau terjadi kesalahan", "error");
                 });
